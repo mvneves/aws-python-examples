@@ -23,13 +23,12 @@ table_definition = {
     }
 }
 
-# Cria a tabela
-response = dynamodb_client.create_table(**table_definition)
-
-    
 try:
     # Cria a tabela
     response = dynamodb_client.create_table(**table_definition)
+
+    # Aguarda a tabela ficar ativa antes de usá-la nos outros scripts
+    dynamodb_client.get_waiter('table_exists').wait(TableName=table_name)
     print(f"Tabela {table_name} criada com sucesso!")
 except dynamodb_client.exceptions.ResourceInUseException:
     print(f"A tabela {table_name} já existe.")

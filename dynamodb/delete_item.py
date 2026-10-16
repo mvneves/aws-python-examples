@@ -7,8 +7,10 @@ dynamodb_client = boto3.client('dynamodb')
 table_name = 'users'
 
 # Define a chave primária do item a ser excluído
+# A tabela usa chave composta: é preciso informar a chave de partição e a de ordenação
 key = {
-    'username': {'S': 'joao.silva'}
+    'username': {'S': 'joao.silva'},
+    'last_name': {'S': 'Silva'}
 }
 
 try:

@@ -7,8 +7,10 @@ dynamodb_client = boto3.client('dynamodb')
 table_name = 'users'
 
 # Define a chave primária e regra de atualização do item
+# A tabela usa chave composta: é preciso informar a chave de partição e a de ordenação
 key = {
-    'username': {'S': 'joao.silva'}
+    'username': {'S': 'joao.silva'},
+    'last_name': {'S': 'Silva'}
 }
 update_expression = "SET age = :new_age"
 expression_attribute_values = {

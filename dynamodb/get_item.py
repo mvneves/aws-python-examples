@@ -7,10 +7,10 @@ dynamodb_client = boto3.client('dynamodb')
 table_name = 'users'
 
 try:
-    # Lê o item da tabela
+    # Lê o item da tabela (a chave composta exige username e last_name)
     response = dynamodb_client.get_item(
         TableName=table_name,
-        Key={'username': {'S': 'joao.silva'}}
+        Key={'username': {'S': 'joao.silva'}, 'last_name': {'S': 'Silva'}}
     )
     
     # Verifica se o item foi encontrado
